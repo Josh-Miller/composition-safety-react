@@ -1,0 +1,239 @@
+# Composition & Safety in React
+### Josh Miller
+---
+# About Me
+---
+import { CodeSurfer } from "mdx-deck-code-surfer"
+import nightOwl from "prism-react-renderer/themes/nightOwl"
+import Profile from './profileComponent';
+import Form from './formValidate';
+import Form2 from './formValidate2';
+import { Image } from 'mdx-deck';
+
+<CodeSurfer
+  title="What could go wrong?"
+  code={require("!raw-loader!./bad-if-checking.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={false}
+  dark={false}
+/>
+
+---
+
+<CodeSurfer
+  title="Maybe cleans up"
+  code={require("!raw-loader!./maybe-ifs.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={false}
+  dark={false}
+/>
+
+```notes
+Our return type has changed
+We get to let the caller decide how to handle the nothing case
+
+```
+---
+
+<CodeSurfer
+  title="Curry"
+  code={require("!raw-loader!./curry.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+  steps={[
+    {},
+    { tokens: { 2: [6, 7, 8, 9, 10, 11] } },
+    { tokens: { 10: [6, 7, 8, 9, 10, 11] } },
+    {}
+  ]}
+/>
+---
+
+<CodeSurfer
+  title="Composition"
+  code={require("!raw-loader!./compose.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<CodeSurfer
+  title="We all know and love array.map"
+  code={require("!raw-loader!./array-functor.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+# Functor
+- Keeps the same shape
+- Lifts a function into the context
+---
+<CodeSurfer
+  title="Let's use compose to avoid mapping twice"
+  code={require("!raw-loader!./array-functor2.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+## Functor Rules
+<pre>map(x => x) === (x => x)</pre>
+<pre>.map(fn1).map(fn2) === .map(compose(fn1)(fn2))</pre>
+---
+## Type Signature
+
+<pre>map :: (a -> b) -> f a -> f b</pre>
+---
+<Image src="https://media.giphy.com/media/BmmfETghGOPrW/giphy.gif" />
+---
+<CodeSurfer
+  title="Simple Functor Implementation"
+  code={require("!raw-loader!./box-functor.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={false}
+  dark={false}
+/>
+---
+<CodeSurfer
+  title="Maybe Functor Implementation"
+  code={require("!raw-loader!./maybe-functor.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={false}
+  dark={false}
+/>
+---
+
+<CodeSurfer
+  title="Maybe cleans up"
+  code={require("!raw-loader!./maybe-ifs.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={false}
+  dark={false}
+/>
+
+```notes
+Our return type has changed
+We get to let the caller decide how to handle the nothing case
+
+```
+---
+<CodeSurfer
+  title="How to use it in React"
+  code={require("!raw-loader!./profileComponent.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<Profile />
+---
+# Monad
+
+- Allows us to combine multiple contexts
+- Allows us to control the flow of our program
+---
+## Type Signature
+
+<pre>chain :: (a -> m b) -> m a -> m b</pre>
+---
+<CodeSurfer
+  title="Let's define a join"
+  code={require("!raw-loader!./maybe-join.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<CodeSurfer
+  title="Let's define chain"
+  code={require("!raw-loader!./maybe-chain.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+## Either
+- Left: an error case
+- Right: success case
+---
+<CodeSurfer
+  title="How to use it in React"
+  code={require("!raw-loader!./formValidate.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<Form />
+---
+<CodeSurfer
+  title="How to use it in React"
+  code={require("!raw-loader!./formValidate2.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<Form2 />
+---
+# Applicative
+
+What do we do when we have 2 values wrapped up?
+---
+<CodeSurfer
+  title="What do we do?"
+  code={require("!raw-loader!./app1.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+## Type Signature
+
+<pre>ap :: f (a -> b) -> f a -> f b</pre>
+---
+<CodeSurfer
+  title="Add ap to our Box"
+  code={require("!raw-loader!./box-ap.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<CodeSurfer
+  title="Lift the function"
+  code={require("!raw-loader!./pp2.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<CodeSurfer
+  title="Async-ish"
+  code={require("!raw-loader!./task-apply.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+# The end
