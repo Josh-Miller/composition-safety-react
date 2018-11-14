@@ -18,6 +18,13 @@ const UserProfile = user => friends => (
   </div>
 )
 
-Task.of(UserProfile)
-  .ap(getUser(userId))
-  .ap(getUserFriends(userId));
+const Parent = () => (
+  <div>
+    {
+      Task.of(UserProfile)
+        .ap(getUser(userId))
+        .ap(getUserFriends(userId))
+        .getOrElse(<div>Loading ...</div>);
+    }
+  </div>
+)

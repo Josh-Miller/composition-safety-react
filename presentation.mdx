@@ -71,10 +71,6 @@ We get to let the caller decide how to handle the nothing case
   dark={true}
 />
 ---
-# Functor
-- Keeps the same shape
-- Lifts a function into the context
----
 <CodeSurfer
   title="Let's use compose to avoid mapping twice"
   code={require("!raw-loader!./array-functor2.js")}
@@ -83,6 +79,10 @@ We get to let the caller decide how to handle the nothing case
   showNumbers={true}
   dark={true}
 />
+---
+# Functor
+- Keeps the same shape
+- Lifts a function into the context
 ---
 ## Functor Rules
 <pre>map(x => x) === (x => x)</pre>
@@ -144,6 +144,21 @@ We get to let the caller decide how to handle the nothing case
 - Allows us to combine multiple contexts
 - Allows us to control the flow of our program
 ---
+## Either
+- Left: an error case
+- Right: success case
+---
+<CodeSurfer
+  title="How to use it in React"
+  code={require("!raw-loader!./formValidate.js")}
+  lang="javascript"
+  theme={nightOwl}
+  showNumbers={true}
+  dark={true}
+/>
+---
+<Form />
+---
 ## Type Signature
 
 <pre>chain :: (a -> m b) -> m a -> m b</pre>
@@ -165,21 +180,6 @@ We get to let the caller decide how to handle the nothing case
   showNumbers={true}
   dark={true}
 />
----
-## Either
-- Left: an error case
-- Right: success case
----
-<CodeSurfer
-  title="How to use it in React"
-  code={require("!raw-loader!./formValidate.js")}
-  lang="javascript"
-  theme={nightOwl}
-  showNumbers={true}
-  dark={true}
-/>
----
-<Form />
 ---
 <CodeSurfer
   title="How to use it in React"
@@ -235,5 +235,10 @@ What do we do when we have 2 values wrapped up?
   showNumbers={true}
   dark={true}
 />
+---
+## Some usdeful links
+- http://www.tomharding.me/fantasy-land/
+- https://github.com/fantasyland/fantasy-land
+- https://wiki.haskell.org/Typeclassopedia
 ---
 # The end
